@@ -4,8 +4,6 @@ var util = require("util");
 var inquirer = require("inquirer");
 const { title } = require("process");
 
-const appendFileAsync = util.promisify(fs.appendFile);
-const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 //promt the questions for the readme using inquirer
@@ -36,7 +34,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
     },
     {
       type: "input",
-      message: "Enter in the table of contents",  // table of contents  // done 
+      message: "Add any extra table of contents lines.",  // table of contents  // done 
       name: "contents" 
     },
     {
@@ -58,46 +56,53 @@ const writeFileAsync = util.promisify(fs.writeFile);
       type: "input",
       message: "Go the extra mile and write tests for your application. Then provide examples on how to run them?", // tests
       name: "test"
-      },
+    },
 
-      {
+    {
       type: "input",
       message: "If you have any questions please feel free to reach out to me at?", // questions & contact information 
       name: "contact"
-      },
+    },
 
-      {
+    {
       name: "license",
       type: "list",
       message: "Type of License:",
       choices: ["BSD", "MIT", "GPL"], //done
       
-      }]
+    }]
 
-     function writeTxtFile ({title, github, link, contents, description, instructions, install, guidlines, lisence, test, contact}) 
+     function writeTxtFile ({title, github, link, contents, description, instructions, install, guidelines, license, test, contact}) 
      {
     return `
-    **Title: ${title}
+**Title: ${title}
 
-    **Github UserName: ${github}
+**Github UserName: ${github}
 
-    **Here is the link to my deployed application: ${link}
+**Here is the link to my deployed application: ${link}
 
-    Table of Contents: ${contents}
+Table of Contents: 
+* [Description] (#description)
+* [Installation](#install)
+* [Contribute](#guidlines)
+* [License](#license)
+* [Test](#test)
+* [Contact](#contact)
+* ${contents}
 
-    **Below is a description of my project: ${description}
+**Below is a description of my project: ${description}
 
-    **Instructions on usage: ${instructions}
+**Instructions on usage: ${instructions}
 
-    **Here are the steps required to install your project; ${install}
+**Here are the steps required to install your project; ${install}
 
-    **How to contribute: ${guidlines}
+**How to contribute: ${guidelines}
        
-    **License Info: ${lisence}
+**License Info: ${license}
         
-    **Here are some example tests I've run ${test}
+**Here are some example tests I've run ${test}
         
-    **You can contact me with any questions at ${contact}`
+**You can contact me with any questions at ${contact}`
 
      }
 
@@ -116,11 +121,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
     });
      
      
-    // const finalTxt = writeTxtFile(answer)
-    // fs.writeFile("README.md", finalTxt, function(err){
-    // if( err ) return console.log("You done messed up.")
-    // console.log("Who would have guessed this works!")
-    // })
+   
         
         
     
@@ -128,21 +129,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
      
  
 
-//    .then(function(answer) {
-//     appendFileAsync("README.md", answer.contact +"\n")
-    // appendFileAsync("README.md", + "**Here are some example tests I've run:",+ "\n",answer.test +"\n")
-    // appendFileAsync("README.md", + "**License Info:",+ "\n",answer.license +"\n")
-    // appendFileAsync("README.md", + "**How to contribute:",+ "\n",answer.guidelines +"\n")
-    // appendFileAsync("README.md", + "What are the steps required to install your project?",+ "\n",answer.install +"\n")
-    // appendFileAsync("README.md", + "**Instructions on usage:",+ "\n",answer.instructions +"\n")
-    // appendFileAsync("README.md", + "**Below is a description of my project", + "\n", answer.description +"\n")
-    // appendFileAsync("README.md", + "Table of Contents:", + "\n", answer.name +"\n") //come back to this one 
-    // appendFileAsync("README.md", + "**Here is the link to my deployed application:",+ "\n",answer.link +"\n")
-    // appendFileAsync("README.md", + "**Github UserName:",+ "\n", answer.github +"\n")
-    // appendFileAsync("README.md", + "**Title:",  answer.title +"\n")
-   
 
-    // });
 
 
 
